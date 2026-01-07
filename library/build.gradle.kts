@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
     id("maven-publish")
+    kotlin("plugin.serialization") version libs.versions.kotlin
 }
 
 group = "alexey.odintsov.logstudiolib"
@@ -49,6 +50,10 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.kotlin.serializaion.cbor)
+            implementation(libs.kotlin.serializaion.json)
+            implementation(libs.kotlin.datetime)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

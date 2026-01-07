@@ -14,4 +14,6 @@ interface LogStudioPlugin {
     fun directoryName(): String
 
     fun className(): String
+
+    fun init(pluginDirectoryPath: String)
 }

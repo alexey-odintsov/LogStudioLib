@@ -13,9 +13,9 @@ interface Formatter {
 
     companion object {
         val STUB = object : Formatter {
-            override fun formatDateTime(timeStampUs: Long): String = ""
-            override fun formatTime(timeStampUs: Long): String = ""
-            override fun formatSizeHuman(size: Long): String = ""
+            override fun formatDateTime(timeStampUs: Long): String = timeStampUs.toString()
+            override fun formatTime(timeStampUs: Long): String = timeStampUs.toString()
+            override fun formatSizeHuman(size: Long): String = size.toString()
             override fun formatNumber(number: Number, format: String?): String = number.toString()
             override fun setTimeZone(timeZone: TimeZone) = Unit
             override fun getTimeZone(): TimeZone = TimeZone.currentSystemDefault()

@@ -5,6 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ColumnData(
+    val id: Int,
     val key: String,
     val title: String,
     val size: Float = 0f,

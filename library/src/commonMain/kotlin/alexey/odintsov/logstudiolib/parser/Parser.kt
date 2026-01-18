@@ -5,6 +5,9 @@ import alexey.odintsov.logstudiolib.messages.Message
 
 
 interface Parser {
+    suspend fun indexFile(onProgressUpdated: (Float) -> Unit): List<MessageIndex>
+    suspend fun getMessage(offsetInfo: MessageIndex, messageSource: ParsingType): Message?
+
     suspend fun parseFiles(
         filePaths: List<String>,
         progressCallback: (String, Float) -> Unit

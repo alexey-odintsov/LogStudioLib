@@ -50,9 +50,7 @@ data class Message(
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-
-        other as Message
-
+        if (other == null || other !is Message) return false
         if (id != other.id) return false
         if (!columns.contentEquals(other.columns)) return false
 

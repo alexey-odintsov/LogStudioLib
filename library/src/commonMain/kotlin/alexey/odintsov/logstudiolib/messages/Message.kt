@@ -1,19 +1,18 @@
 package alexey.odintsov.logstudiolib.messages
 
 import alexey.odintsov.logstudiolib.Formatter
-import androidx.compose.runtime.Stable
+import kotlinx.serialization.Contextual
+import kotlinx.serialization.Serializable
 
-//@Serializable(with = MessageJsonSerializer::class)
-//@Serializable(with = MessageCborSerializer::class)
-@Stable
+@Serializable(with = MessageCsvSerializer::class)
 data class Message(
     val id: Int,
-    val columns: Array<Any>,
+    val columns: Array<@Contextual Any>,
 ) {
     companion object {
+        const val ID = "id"
         const val PAYLOAD = "payload"
         const val TIMESTAMP = "timestamp"
-        const val ID = "id"
         const val NUMBER = "number"
         const val LEVEL = "level"
 
@@ -21,7 +20,7 @@ data class Message(
             message: Message,
             payloadColumnIndex: Int,
         ): String? {
-            return message.columns[payloadColumnIndex].toString()
+            return message.columns[payloadColumnIndex]?.toString()
         }
 
         fun formatValue(
@@ -49,22 +48,18 @@ data class Message(
         }
     }
 
-
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other == null || this::class != other::class) return false
-
-        other as Message
-
+        if (other == null || other !is Message) return false
         if (id != other.id) return false
-        if (columns != other.columns) return false
+        if (!columns.contentEquals(other.columns)) return false
 
         return true
     }
 
     override fun hashCode(): Int {
         var result = id
-        result = 31 * result + columns.hashCode()
+        result = 31 * result + columns.contentHashCode()
         return result
     }
 }

@@ -7,8 +7,8 @@ import java.util.Date
 import java.util.Locale
 
 class TestFormatter: Formatter {
-    val dateTimeFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-    val timeFormatter = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+    val dateTimeFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US)
+    val timeFormatter = SimpleDateFormat("HH:mm:ss", Locale.US)
 
     override fun formatDateTime(timeStampUs: Long): String {
         return dateTimeFormatter.format(Date(timeStampUs / 1000))

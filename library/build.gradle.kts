@@ -13,7 +13,7 @@ plugins {
 
 group = "alexey.odintsov.logstudiolib"
 val libraryArtifact = "logstudiolib"
-version = "0.2.1"
+version = "0.2.2"
 
 kotlin {
     jvm()
@@ -57,6 +57,7 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+            implementation(libs.junit)
         }
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)

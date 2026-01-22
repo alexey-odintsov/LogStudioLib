@@ -32,7 +32,7 @@ object MessageCsvSerializer : KSerializer<Message> {
 
         // Your Message is Array<Any> but we build Array<Any?> (CSV may represent empty as "").
         @Suppress("UNCHECKED_CAST")
-        return Message(id = id, columns = cols as Array<Any>)
+        return Message(id = id, columns = cols as Array<Any?>)
     }
 
     private fun csvEscape(s: String): String {

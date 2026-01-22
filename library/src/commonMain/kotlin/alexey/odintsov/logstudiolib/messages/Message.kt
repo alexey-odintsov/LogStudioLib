@@ -7,12 +7,13 @@ import kotlinx.serialization.Serializable
 @Serializable(with = MessageCsvSerializer::class)
 data class Message(
     val id: Int,
-    val columns: Array<@Contextual Any>,
+    val columns: Array<@Contextual Any?>,
 ) {
     companion object {
         const val ID = "id"
         const val PAYLOAD = "payload"
         const val TIMESTAMP = "timestamp"
+        const val TIME = "time"
         const val NUMBER = "number"
         const val LEVEL = "level"
 
@@ -32,14 +33,16 @@ data class Message(
             val value = message.columns[columnIndex]
             val columnValue = try {
                 when {
+                    value == null -> "" // prevent casting NPE
                     metaInfo.containsKey(ID) -> message.id.toString()
                     metaInfo.containsKey(TIMESTAMP) -> formatter.formatDateTime(value as Long)
+                    metaInfo.containsKey(TIME) -> formatter.formatTime(value as Long)
                     metaInfo.containsKey(NUMBER) -> formatter.formatNumber(
                         value as Float,
                         metaInfo[NUMBER]
                     )
 
-                    else -> value?.toString() ?: ""
+                    else -> value.toString()
                 }
             } catch (e: Exception) {
                 "$e"

@@ -4,7 +4,7 @@ import alexey.odintsov.logstudiolib.Formatter
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
-@Serializable(with = MessageCsvSerializer::class)
+@Serializable(with = MessageJsonSerializer::class)
 data class Message(
     val id: Int,
     val columns: Array<@Contextual Any?>,

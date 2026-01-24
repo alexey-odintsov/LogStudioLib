@@ -79,10 +79,13 @@ object MessageJsonSerializer : KSerializer<Message> {
         else -> JsonPrimitive(value.toString()) // fallback
     }
 
-    private fun fromJsonElement(el: JsonElement): Any = when {
-        el is JsonNull -> "null"
+    private fun fromJsonElement(el: JsonElement): Any? = when {
+        el is JsonNull -> null
         el is JsonPrimitive && el.isString -> el.content
-        el is JsonPrimitive -> el.booleanOrNull ?: el.longOrNull ?: el.doubleOrNull ?: el.content
+        el is JsonPrimitive -> el.booleanOrNull
+            ?: el.longOrNull
+            ?: el.doubleOrNull?.toFloat()  // Convert Double to Float
+            ?: el.content
         el is JsonObject -> el.mapValues { fromJsonElement(it.value) }
         el is JsonArray -> el.map { fromJsonElement(it) }
         else -> el.toString()

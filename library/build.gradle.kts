@@ -13,7 +13,7 @@ plugins {
 
 group = "alexey.odintsov.logstudiolib"
 val libraryArtifact = "logstudiolib"
-version = "0.2.3-serializer2"
+version = "0.2.3"
 
 kotlin {
     jvm()

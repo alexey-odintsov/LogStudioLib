@@ -13,7 +13,7 @@ plugins {
 
 group = "alexey.odintsov.logstudiolib"
 val libraryArtifact = "logstudiolib"
-version = "0.2.3"
+version = "0.2.4"
 
 kotlin {
     jvm()
@@ -69,6 +69,7 @@ kotlin {
 
 publishing {
     repositories {
+        mavenLocal()
         maven {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/alexey-odintsov/logstudiolib")

@@ -18,4 +18,14 @@ data class ColumnData(
     enum class Align {
         Left, Center, Right,
     }
+
+    companion object {
+        fun getPayloadColumnIndex(columns: List<ColumnData>): Int {
+            return columns.firstOrNull { c -> c.metaInfo.contains(Message.PAYLOAD) }?.order ?: -1
+        }
+
+        fun getPayloadColumnIndex(columns: Array<ColumnData>): Int {
+            return columns.firstOrNull { c -> c.metaInfo.contains(Message.PAYLOAD) }?.order ?: -1
+        }
+    }
 }

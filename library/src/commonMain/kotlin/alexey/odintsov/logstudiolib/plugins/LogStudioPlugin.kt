@@ -15,5 +15,9 @@ interface LogStudioPlugin {
 
     fun className(): String
 
-    fun init(pluginDirectoryPath: String, onProgressUpdate: (String, Float) -> Unit)
+    fun init(
+        pluginDirectoryPath: String,
+        onProgressUpdate: (String, Float) -> Unit,
+        onReport: (String) -> Unit,
+    )
 }
